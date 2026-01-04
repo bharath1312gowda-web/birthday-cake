@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Happy Birthday Sthuthi 🎀</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
@@ -13,7 +13,7 @@
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #ffe6f0, #fff);
+  background: linear-gradient(135deg, #ffe6f0, #fff0f5);
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -25,8 +25,11 @@ body {
   display: none;
   text-align: center;
   padding: 20px;
-  max-width: 360px;
+  width: 90%;
+  max-width: 400px;
   animation: fadeIn .8s ease;
+  z-index: 10;
+  position: relative;
 }
 
 .screen.active { display: block; }
@@ -38,6 +41,7 @@ body {
 
 h1 {
   color: #ff4d88;
+  margin-bottom: 10px;
   animation: popText .9s ease;
 }
 
@@ -46,7 +50,7 @@ h1 {
   to   { transform: scale(1); opacity: 1; }
 }
 
-p { color: #555; }
+p { color: #555; font-size: 1.1rem; }
 
 button {
   padding: 14px 32px;
@@ -55,148 +59,286 @@ button {
   background: #ff4d88;
   color: white;
   font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+  box-shadow: 0 4px 15px rgba(255, 77, 136, 0.3);
 }
 
-/* HELLO KITTY */
-.kitty {
-  width: 140px;
-  height: 120px;
-  background: white;
-  border-radius: 60px;
-  margin: 20px auto;
+button:hover {
+  transform: scale(1.05);
+  background: #ff3377;
+}
+
+button:active { transform: scale(0.95); }
+
+/* --- HELLO KITTY FIXES --- */
+.kitty-container {
   position: relative;
+  width: 160px;
+  height: 140px;
+  margin: 0 auto 20px;
   animation: float 3s ease-in-out infinite;
 }
 
-@keyframes float {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-12px); }
+.kitty-head {
+  width: 140px;
+  height: 110px;
+  background: white;
+  border-radius: 50% 50% 45% 45% / 60% 60% 40% 40%;
+  border: 3px solid #333;
+  position: absolute;
+  bottom: 0;
+  left: 10px;
+  z-index: 2;
 }
+
+.ear {
+  width: 35px;
+  height: 35px;
+  background: white;
+  border: 3px solid #333;
+  position: absolute;
+  top: 5px;
+  border-radius: 10px 50% 0 0;
+  z-index: 1;
+}
+
+.ear.left { left: 15px; transform: rotate(-20deg); }
+.ear.right { right: 15px; transform: rotate(20deg); }
 
 .eye {
-  width: 10px;
-  height: 10px;
-  background: black;
+  width: 12px;
+  height: 16px;
+  background: #333;
   border-radius: 50%;
   position: absolute;
-  top: 45px;
+  top: 50px;
 }
 
-.eye.left { left: 40px; }
-.eye.right { right: 40px; }
+.eye.left { left: 35px; }
+.eye.right { right: 35px; }
 
 .nose {
-  width: 12px;
-  height: 8px;
+  width: 16px;
+  height: 10px;
   background: #ffcc00;
+  border: 2px solid #333;
   border-radius: 50%;
   position: absolute;
-  top: 55px;
+  top: 65px;
   left: 50%;
   transform: translateX(-50%);
 }
 
 .bow {
-  width: 30px;
-  height: 20px;
+  width: 45px;
+  height: 25px;
   background: #ff4d88;
+  border: 3px solid #333;
   position: absolute;
-  top: 15px;
+  top: 10px;
   right: 25px;
-  border-radius: 5px;
+  border-radius: 10px;
+  z-index: 4;
 }
 
-/* CAKE */
-.cake {
-  width: 220px;
-  height: 140px;
-  background: linear-gradient(#ffd6e8, #ff9ac1);
-  border-radius: 0 0 25px 25px;
-  margin: 30px auto;
+.bow::after {
+  content: '';
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: #ff4d88;
+  border: 3px solid #333;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.whisker {
+  width: 25px;
+  height: 2px;
+  background: #333;
+  position: absolute;
+}
+/* Whisker positioning */
+.w-left-1 { top: 60px; left: -10px; transform: rotate(10deg); }
+.w-left-2 { top: 70px; left: -10px; transform: rotate(-5deg); }
+.w-right-1 { top: 60px; right: -10px; transform: rotate(-10deg); }
+.w-right-2 { top: 70px; right: -10px; transform: rotate(5deg); }
+
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* --- CAKE & CANDLE --- */
+.cake-container {
   position: relative;
+  margin: 50px auto 20px;
+  width: 200px;
+}
+
+.cake {
+  width: 200px;
+  height: 100px;
+  background: #ff9ac1;
+  border-radius: 10px 10px 0 0;
+  position: relative;
+}
+.cake::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 20px;
+  background: #ffc2da;
+  top: 0;
+  border-radius: 10px 10px 0 0;
+}
+.layer {
+  width: 220px;
+  height: 40px;
+  background: #ffd6e8;
+  position: absolute;
+  bottom: -30px;
+  left: -10px;
+  border-radius: 10px;
 }
 
 .candle {
-  width: 10px;
+  width: 12px;
   height: 40px;
-  background: #ffd000;
+  background: repeating-linear-gradient(45deg, #fff, #fff 5px, #4facfe 5px, #4facfe 10px);
   position: absolute;
   top: -40px;
-  left: 105px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 4px;
 }
 
 .flame {
-  width: 12px;
-  height: 12px;
-  background: orange;
-  border-radius: 50%;
+  width: 16px;
+  height: 24px;
+  background: radial-gradient(circle at 50% 80%, #ffd000, #ff8800, transparent);
+  border-radius: 50% 50% 20% 20%;
   position: absolute;
-  top: -14px;
-  left: -1px;
-  animation: flicker .6s infinite;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: flicker 0.6s infinite alternate;
+  cursor: pointer;
+  filter: drop-shadow(0 0 5px rgba(255, 165, 0, 0.6));
 }
 
 @keyframes flicker {
-  0%,100% { opacity: .6; }
-  50% { opacity: 1; }
+  from { transform: translateX(-50%) scale(1); opacity: 0.9; }
+  to { transform: translateX(-50%) scale(1.1); opacity: 1; }
 }
 
 .flame.blow {
-  animation: blowOut 1s forwards;
+  animation: blowOut 0.5s forwards;
 }
 
 @keyframes blowOut {
-  to { transform: scale(0); opacity: 0; }
+  0% { transform: translateX(-50%) scale(1); opacity: 1; }
+  100% { transform: translateX(-50%) scale(0.2) translateY(-20px); opacity: 0; }
 }
 
+/* --- INPUT --- */
 input {
-  padding: 12px;
-  width: 90%;
+  padding: 15px;
+  width: 100%;
   border-radius: 20px;
-  border: 1px solid #ddd;
+  border: 2px solid #ddd;
+  font-size: 16px; /* Prevents zoom on iOS */
+  outline: none;
+  transition: border 0.3s;
 }
+
+input:focus { border-color: #ff4d88; }
+
+/* --- CONFETTI CANVAS --- */
+#confetti {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+
 </style>
 </head>
 
 <body>
 
+<canvas id="confetti"></canvas>
+
 <div class="screen active" id="s1">
-  <div class="kitty">
+  <div class="kitty-container">
+    <div class="ear left"></div>
+    <div class="ear right"></div>
+    <div class="kitty-head">
+      <div class="eye left"></div>
+      <div class="eye right"></div>
+      <div class="nose"></div>
+      <div class="whisker w-left-1"></div>
+      <div class="whisker w-left-2"></div>
+      <div class="whisker w-right-1"></div>
+      <div class="whisker w-right-2"></div>
+    </div>
     <div class="bow"></div>
-    <div class="eye left"></div>
-    <div class="eye right"></div>
-    <div class="nose"></div>
   </div>
-  <h1>Happy Birthday, Sthuthi 🎀</h1>
-  <p>Ready for a cute little surprise? 💖</p>
-  <button onclick="next(2)">Let’s Gooo 🎂</button>
+  <h1>Happy Birthday, Sthuthi! 🎀</h1>
+  <p>I have a cute little surprise for you... 💖</p>
+  <button onclick="next(2)">Open Surprise 🎂</button>
 </div>
 
 <div class="screen" id="s2">
-  <h1>Blow the Candle 🕯️</h1>
-  <p>Tap the flame 💨</p>
-  <div class="cake">
-    <div class="candle">
-      <div class="flame" id="flame" onclick="blowCandle()"></div>
+  <h1>Make a Wish 🕯️</h1>
+  <p>Tap the flame to blow out the candle!</p>
+  <div class="cake-container">
+    <div class="cake">
+      <div class="candle">
+        <div class="flame" id="flame" onclick="blowCandle()"></div>
+      </div>
+      <div class="layer"></div>
     </div>
   </div>
 </div>
 
 <div class="screen" id="s3">
-  <h1>Make a Wish ✨</h1>
-  <input id="wish" placeholder="My birthday wish is...">
+  <h1>Type Your Wish ✨</h1>
+  <p>Don't tell anyone... 🤫</p>
+  <input id="wish" type="text" placeholder="I wish for...">
   <br><br>
-  <button onclick="saveWish()">Done 🎀</button>
+  <button onclick="saveWish()">Lock it in 🔒</button>
 </div>
 
 <div class="screen" id="s4">
-  <h1>Perfect 🎉</h1>
-  <p id="finalWish"></p>
-  <p>May all your wishes come true 💖</p>
+  <h1>YAYYY! 🎉</h1>
+  <p id="finalWish" style="font-weight: 600; color: #ff4d88;"></p>
+  <p>Hope your day is as sweet as you! 💖</p>
+  <div class="kitty-container" style="transform: scale(0.8);">
+    <div class="ear left"></div>
+    <div class="ear right"></div>
+    <div class="kitty-head">
+      <div class="eye left"></div>
+      <div class="eye right"></div>
+      <div class="nose"></div>
+      <div class="whisker w-left-1"></div>
+      <div class="whisker w-left-2"></div>
+      <div class="whisker w-right-1"></div>
+      <div class="whisker w-right-2"></div>
+    </div>
+    <div class="bow"></div>
+  </div>
 </div>
 
 <script>
+// --- PAGE LOGIC ---
 function next(n) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById('s' + n).classList.add('active');
@@ -204,273 +346,76 @@ function next(n) {
 
 function blowCandle() {
   document.getElementById('flame').classList.add('blow');
-  setTimeout(() => next(3), 1000);
+  setTimeout(() => {
+    next(3);
+  }, 800);
 }
 
 function saveWish() {
   const wish = document.getElementById('wish').value;
-  document.getElementById('finalWish').innerText =
-    wish ? "✨ Your wish: " + wish : "✨ A secret wish was made 💫";
+  document.getElementById('finalWish').innerText = 
+    wish ? "✨ Wish Locked: " + wish : "✨ A secret wish was made! 💫";
   next(4);
-}
-</script>
-
-</body>
-</html>
-.flame{
-  width:12px;
-  height:12px;
-  background:orange;
-  border-radius:50%;
-  position:absolute;
-  top:-14px;
-  left:-1px;
-  animation:flicker .6s infinite;
-  cursor:pointer;
+  startConfetti();
 }
 
-@keyframes flicker{
-  0%,100%{transform:scale(1);opacity:.7;}
-  50%{transform:scale(1.2);opacity:1;}
+// --- SIMPLE CONFETTI SCRIPT ---
+const canvas = document.getElementById('confetti');
+const ctx = canvas.getContext('2d');
+let width = window.innerWidth;
+let height = window.innerHeight;
+canvas.width = width;
+canvas.height = height;
+
+const particles = [];
+const colors = ['#ff4d88', '#ff9ac1', '#ffd6e8', '#fff', '#ffcc00'];
+
+function startConfetti() {
+  for (let i = 0; i < 150; i++) {
+    particles.push({
+      x: Math.random() * width,
+      y: Math.random() * height - height,
+      r: Math.random() * 6 + 2,
+      d: Math.random() * 10 + 2,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      tilt: Math.floor(Math.random() * 10) - 10
+    });
+  }
+  draw();
 }
 
-.flame.blow{
-  animation:blowOut 1s forwards;
+function draw() {
+  ctx.clearRect(0, 0, width, height);
+  particles.forEach((p, i) => {
+    p.y += p.d;
+    p.tilt += 1;
+    ctx.beginPath();
+    ctx.lineWidth = p.r / 2;
+    ctx.strokeStyle = p.color;
+    ctx.moveTo(p.x + p.tilt + p.r / 2, p.y);
+    ctx.lineTo(p.x + p.tilt, p.y + p.tilt + p.r / 5);
+    ctx.stroke();
+
+    if (p.y > height) {
+      particles[i] = {
+        x: Math.random() * width,
+        y: -10,
+        r: p.r,
+        d: p.d,
+        color: p.color,
+        tilt: p.tilt
+      };
+    }
+  });
+  requestAnimationFrame(draw);
 }
 
-@keyframes blowOut{
-  0%{transform:scale(1);opacity:1;}
-  40%{transform:translateX(5px) scale(1.3);}
-  100%{transform:scale(0);opacity:0;}
-}
-
-.cut-line{
-  position:absolute;
-  top:0;bottom:0;
-  left:50%;
-  width:4px;
-  background:white;
-  display:none;
-}
-
-/* INPUT */
-input{
-  padding:12px;
-  width:90%;
-  border-radius:20px;
-  border:1px solid #ddd;
-}
-</style>
-</head>
-
-<body>
-
-<!-- SCREEN 1 -->
-<div class="screen active" id="s1">
-  <div class="kitty">
-    <div class="bow"></div>
-    <div class="eye left"></div>
-    <div class="eye right"></div>
-    <div class="nose"></div>
-  </div>
-  <h1>Happy Birthday, Sthuthi 🎀✨</h1>
-  <p>Ready for a cute little surprise? 💖</p>
-  <button onclick="next(2)">Let’s Gooo 🎂</button>
-</div>
-
-<!-- SCREEN 2 -->
-<div class="screen" id="s2">
-  <h1>Blow the Candle 🕯️</h1>
-  <p>Tap the flame to blow it 💨</p>
-
-  <div class="cake">
-    <div class="candle">
-      <div class="flame" id="flame" onclick="blowCandle()"></div>
-    </div>
-    <div class="cut-line" id="cut"></div>
-  </div>
-</div>
-
-<!-- SCREEN 3 -->
-<div class="screen" id="s3">
-  <h1>Make a Wish ✨</h1>
-  <p>Close your eyes and type it 💫</p>
-  <input id="wish" placeholder="My birthday wish is...">
-  <br><br>
-  <button onclick="saveWish()">Done 🎀</button>
-</div>
-
-<!-- SCREEN 4 -->
-<div class="screen" id="s4">
-  <h1>Perfect Cut 🎉🎂</h1>
-  <p id="finalWish"></p>
-  <p>May all your wishes come true,<br>Sthuthi 💖🐱</p>
-</div>
-
-<script>
-function next(n){
-  document.querySelectorAll('.screen')
-    .forEach(s=>s.classList.remove('active'));
-  document.getElementById('s'+n).classList.add('active');
-}
-
-function blowCandle(){
-  const flame=document.getElementById("flame");
-  flame.classList.add("blow");
-  setTimeout(()=>next(3),1200);
-}
-
-function saveWish(){
-  const wish=document.getElementById("wish").value;
-  localStorage.setItem("wish",wish);
-  document.getElementById("finalWish").innerText =
-    wish ? "✨ Your wish: "+wish : "✨ A secret wish was made 💫";
-  next(4);
-}
-</script>
-
-</body>
-</html>
-/* CAKE */
-.cake{
-  width:220px;
-  height:140px;
-  background:linear-gradient(#ffd6e8,#ff9ac1);
-  border-radius:0 0 25px 25px;
-  margin:30px auto;
-  position:relative;
-  animation:pop .8s ease;
-}
-
-@keyframes pop{
-  from{transform:scale(.6);opacity:0;}
-  to{transform:scale(1);opacity:1;}
-}
-
-.candle{
-  width:10px;height:40px;
-  background:#ffd000;
-  position:absolute;
-  top:-40px;left:105px;
-}
-.flame{
-  width:10px;height:10px;
-  background:orange;
-  border-radius:50%;
-  position:absolute;
-  top:-12px;left:0;
-  animation:flicker .8s infinite;
-}
-@keyframes flicker{
-  0%,100%{opacity:.6;}
-  50%{opacity:1;}
-}
-
-.cut-line{
-  position:absolute;
-  top:0;bottom:0;
-  left:50%;
-  width:4px;
-  background:white;
-  display:none;
-}
-
-/* INPUT */
-input{
-  padding:12px;
-  width:90%;
-  border-radius:20px;
-  border:1px solid #ddd;
-}
-</style>
-</head>
-
-<body>
-
-<!-- SCREEN 1 -->
-<div class="screen active" id="s1">
-  <div class="kitty">
-    <div class="bow"></div>
-    <div class="eye left"></div>
-    <div class="eye right"></div>
-    <div class="nose"></div>
-  </div>
-  <h1>Happy Birthday, Sthuthi 🎀✨</h1>
-  <p>Ready for a cute little surprise? 💖</p>
-  <button onclick="next(2)">Let’s Gooo 🎂</button>
-</div>
-
-<!-- SCREEN 2 -->
-<div class="screen" id="s2">
-  <h1>Cut the Cake 🍰</h1>
-  <p>Tap the cake to cut it ✂️</p>
-  <div class="cake" onclick="cutCake()">
-    <div class="candle"><div class="flame"></div></div>
-    <div class="cut-line" id="cut"></div>
-  </div>
-</div>
-
-<!-- SCREEN 3 -->
-<div class="screen" id="s3">
-  <h1>Make a Wish ✨</h1>
-  <p>Close your eyes and type it 💫</p>
-  <input id="wish" placeholder="My birthday wish is...">
-  <br><br>
-  <button onclick="saveWish()">Done 🎀</button>
-</div>
-
-<!-- SCREEN 4 -->
-<div class="screen" id="s4">
-  <h1>Perfect Cut 🎉</h1>
-  <p id="finalWish"></p>
-  <p>May all your wishes come true, Sthuthi 💖🐱</p>
-</div>
-
-<script>
-function next(n){
-  document.querySelectorAll('.screen')
-    .forEach(s=>s.classList.remove('active'));
-  document.getElementById('s'+n).classList.add('active');
-}
-
-function cutCake(){
-  document.getElementById("cut").style.display="block";
-  setTimeout(()=>next(3),1000);
-}
-
-function saveWish(){
-  const wish=document.getElementById("wish").value;
-  localStorage.setItem("wish",wish);
-  document.getElementById("finalWish").innerText =
-    wish ? "✨ Your wish: "+wish : "✨ A secret wish was made 💫";
-  next(4);
-}
-</script>
-
-</body>
-</html>  <h1>Perfect Cut 🎉🎂</h1>
-  <p id="finalWish"></p>
-  <p>May all your wishes come true, Sthuthi 💖🌸</p>
-</div>
-
-<script>
-function next(n){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById('s'+n).classList.add('active');
-}
-
-function cutCake(){
-  document.getElementById("cut").style.display="block";
-  setTimeout(()=>next(3),1200);
-}
-
-function saveWish(){
-  const wish=document.getElementById("wish").value;
-  localStorage.setItem("wish",wish);
-  document.getElementById("finalWish").innerText =
-    wish ? "✨ Your wish: " + wish : "✨ Wish made silently 💫";
-  next(4);
-}
+window.addEventListener('resize', () => {
+  width = window.innerWidth;
+  height = window.innerHeight;
+  canvas.width = width;
+  canvas.height = height;
+});
 </script>
 
 </body>
