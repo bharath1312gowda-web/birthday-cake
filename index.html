@@ -25,6 +25,8 @@ body{
   display:none;
   text-align:center;
   padding:20px;
+  max-width:360px;
+  margin:auto;
   animation:fadeIn .8s ease;
 }
 .screen.active{display:block;}
@@ -37,6 +39,12 @@ body{
 h1{
   color:#ff4d88;
   margin-bottom:10px;
+  animation:popText .9s ease;
+}
+
+@keyframes popText{
+  0%{transform:scale(.85);opacity:0;}
+  100%{transform:scale(1);opacity:1;}
 }
 
 p{color:#555;}
@@ -58,7 +66,7 @@ button{
   50%{transform:scale(1.05);}
 }
 
-/* HELLO KITTY FACE */
+/* HELLO KITTY */
 .kitty{
   width:140px;
   height:120px;
@@ -68,44 +76,150 @@ button{
   position:relative;
   animation:float 3s ease-in-out infinite;
 }
-
 @keyframes float{
   0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-15px);}
+  50%{transform:translateY(-12px);}
 }
-
-.eye{
-  width:10px;height:10px;
-  background:black;border-radius:50%;
-  position:absolute;top:45px;
-}
+.eye{width:10px;height:10px;background:black;border-radius:50%;position:absolute;top:45px;}
 .eye.left{left:40px;}
 .eye.right{right:40px;}
+.nose{width:12px;height:8px;background:#ffcc00;border-radius:50%;position:absolute;top:55px;left:50%;transform:translateX(-50%);}
+.bow{width:30px;height:20px;background:#ff4d88;position:absolute;top:15px;right:25px;border-radius:5px;}
+.bow::before{content:"";width:12px;height:12px;background:#ff4d88;border-radius:50%;position:absolute;left:-6px;top:4px;}
 
-.nose{
-  width:12px;height:8px;
-  background:#ffcc00;
-  border-radius:50%;
-  position:absolute;top:55px;left:50%;
-  transform:translateX(-50%);
+/* CAKE */
+.cake{
+  width:220px;
+  height:140px;
+  background:linear-gradient(#ffd6e8,#ff9ac1);
+  border-radius:0 0 25px 25px;
+  margin:30px auto;
+  position:relative;
 }
 
-.bow{
-  width:30px;height:20px;
-  background:#ff4d88;
+.candle{
+  width:10px;
+  height:40px;
+  background:#ffd000;
   position:absolute;
-  top:15px;right:25px;
-  border-radius:5px;
-}
-.bow::before{
-  content:"";
-  width:12px;height:12px;
-  background:#ff4d88;
-  border-radius:50%;
-  position:absolute;
-  left:-6px;top:4px;
+  top:-40px;
+  left:105px;
 }
 
+.flame{
+  width:12px;
+  height:12px;
+  background:orange;
+  border-radius:50%;
+  position:absolute;
+  top:-14px;
+  left:-1px;
+  animation:flicker .6s infinite;
+  cursor:pointer;
+}
+
+@keyframes flicker{
+  0%,100%{transform:scale(1);opacity:.7;}
+  50%{transform:scale(1.2);opacity:1;}
+}
+
+.flame.blow{
+  animation:blowOut 1s forwards;
+}
+
+@keyframes blowOut{
+  0%{transform:scale(1);opacity:1;}
+  40%{transform:translateX(5px) scale(1.3);}
+  100%{transform:scale(0);opacity:0;}
+}
+
+.cut-line{
+  position:absolute;
+  top:0;bottom:0;
+  left:50%;
+  width:4px;
+  background:white;
+  display:none;
+}
+
+/* INPUT */
+input{
+  padding:12px;
+  width:90%;
+  border-radius:20px;
+  border:1px solid #ddd;
+}
+</style>
+</head>
+
+<body>
+
+<!-- SCREEN 1 -->
+<div class="screen active" id="s1">
+  <div class="kitty">
+    <div class="bow"></div>
+    <div class="eye left"></div>
+    <div class="eye right"></div>
+    <div class="nose"></div>
+  </div>
+  <h1>Happy Birthday, Sthuthi 🎀✨</h1>
+  <p>Ready for a cute little surprise? 💖</p>
+  <button onclick="next(2)">Let’s Gooo 🎂</button>
+</div>
+
+<!-- SCREEN 2 -->
+<div class="screen" id="s2">
+  <h1>Blow the Candle 🕯️</h1>
+  <p>Tap the flame to blow it 💨</p>
+
+  <div class="cake">
+    <div class="candle">
+      <div class="flame" id="flame" onclick="blowCandle()"></div>
+    </div>
+    <div class="cut-line" id="cut"></div>
+  </div>
+</div>
+
+<!-- SCREEN 3 -->
+<div class="screen" id="s3">
+  <h1>Make a Wish ✨</h1>
+  <p>Close your eyes and type it 💫</p>
+  <input id="wish" placeholder="My birthday wish is...">
+  <br><br>
+  <button onclick="saveWish()">Done 🎀</button>
+</div>
+
+<!-- SCREEN 4 -->
+<div class="screen" id="s4">
+  <h1>Perfect Cut 🎉🎂</h1>
+  <p id="finalWish"></p>
+  <p>May all your wishes come true,<br>Sthuthi 💖🐱</p>
+</div>
+
+<script>
+function next(n){
+  document.querySelectorAll('.screen')
+    .forEach(s=>s.classList.remove('active'));
+  document.getElementById('s'+n).classList.add('active');
+}
+
+function blowCandle(){
+  const flame=document.getElementById("flame");
+  flame.classList.add("blow");
+  setTimeout(()=>next(3),1200);
+}
+
+function saveWish(){
+  const wish=document.getElementById("wish").value;
+  localStorage.setItem("wish",wish);
+  document.getElementById("finalWish").innerText =
+    wish ? "✨ Your wish: "+wish : "✨ A secret wish was made 💫";
+  next(4);
+}
+</script>
+
+</body>
+</html>
 /* CAKE */
 .cake{
   width:220px;
