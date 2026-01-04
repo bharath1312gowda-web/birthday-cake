@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday Sthuthi 🎂</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  font-family: 'Poppins', sans-serif;
+  background: #fff0f6;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+}
+
+.screen{
+  display:none;
+  text-align:center;
+  padding:20px;
+}
+
+.screen.active{display:block;}
+
+h1{
+  color:#ff4d6d;
+}
+
+button{
+  padding:14px 30px;
+  border:none;
+  border-radius:25px;
+  background:#ff4d6d;
+  color:white;
+  font-size:16px;
+}
+
+.cake{
+  width:220px;
+  height:140px;
+  background:linear-gradient(#f3c5c5,#e07a7a);
+  border-radius:0 0 20px 20px;
+  margin:30px auto;
+  position:relative;
+}
+
+.candle{
+  width:10px;
+  height:40px;
+  background:#ffcc00;
+  position:absolute;
+  top:-40px;
+  left:105px;
+}
+
+.cut-line{
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:50%;
+  width:4px;
+  background:white;
+  display:none;
+}
+
+input{
+  padding:12px;
+  width:90%;
+  border-radius:15px;
+  border:1px solid #ccc;
+}
+</style>
+</head>
+
+<body>
+
+<!-- SCREEN 1 -->
+<div class="screen active" id="s1">
+  <h1>Happy Birthday, Sthuthi 🎉✨</h1>
+  <p>Ready for your birthday surprise? 🎁</p>
+  <button onclick="next(2)">Let’s Gooo 🎂</button>
+</div>
+
+<!-- SCREEN 2 -->
+<div class="screen" id="s2">
+  <h1>Cut your Birthday Cake 🎂</h1>
+  <p>Swipe across the cake to cut it ✂️</p>
+
+  <div class="cake" ontouchstart="cutCake()" onclick="cutCake()">
+    <div class="candle"></div>
+    <div class="cut-line" id="cut"></div>
+  </div>
+</div>
+
+<!-- SCREEN 3 -->
+<div class="screen" id="s3">
+  <h1>Make a Wish ✨🕯️</h1>
+  <p>Type your wish and keep it close 💖</p>
+  <input id="wish" placeholder="My birthday wish is...">
+  <br><br>
+  <button onclick="saveWish()">Done 💫</button>
+</div>
+
+<!-- SCREEN 4 -->
+<div class="screen" id="s4">
+  <h1>Perfect Cut 🎉🎂</h1>
+  <p id="finalWish"></p>
+  <p>May all your wishes come true, Sthuthi 💖🌸</p>
+</div>
+
+<script>
+function next(n){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById('s'+n).classList.add('active');
+}
+
+function cutCake(){
+  document.getElementById("cut").style.display="block";
+  setTimeout(()=>next(3),1200);
+}
+
+function saveWish(){
+  const wish=document.getElementById("wish").value;
+  localStorage.setItem("wish",wish);
+  document.getElementById("finalWish").innerText =
+    wish ? "✨ Your wish: " + wish : "✨ Wish made silently 💫";
+  next(4);
+}
+</script>
+
+</body>
+</html>
